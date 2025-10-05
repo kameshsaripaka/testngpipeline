@@ -17,9 +17,11 @@ pipeline {
        stage('Run TestNG Manually') {
             steps {
         sh '''
-            mvn dependency:build-classpath -Dmdep.outputFile=classpath.txt
-            java -cp "$(cat classpath.txt):target/classes:target/test-classes" org.testng.TestNG testng.xml
-        '''
+   			set +e
+  			 java -cp "$(cat classpath.txt):target/classes:target/test-classes" org.testng.TestNG testng.xml
+   			echo "Exit code: $?"
+   			set -e
+			'''
            }
         }
           

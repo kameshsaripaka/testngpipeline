@@ -1,10 +1,5 @@
 pipeline {
-    agent { 
-        docker { 
-            image 'selenium/standalone-chrome:latest'
-            args '--user=root --shm-size=2g' // optional, for Chrome stability
-        } 
-    }
+    agent any
 
     stages {
         stage('Checkout') {
@@ -13,9 +8,19 @@ pipeline {
             }
         }
 
-        stage('Build and Test') {
+        //stage('Build and Test') {
+            //steps {
+               // sh 'mvn clean test'
+            //}
+        //}
+        
+        stage('Build & Test') {
             steps {
-                sh 'mvn clean test'
+                // Run mvn inside a Docker container manually
+                sh '''
+                docker run --rm -v $PWD:/workspace -w /workspace selenium/standalone-chrome:latest \
+                    bash -c "apt-get update && apt-get install -y maven && mvn clean test"
+                '''
             }
         }
 

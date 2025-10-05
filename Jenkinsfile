@@ -1,17 +1,18 @@
 pipeline {
-    agent {
-        docker {
-            image 'selenium/standalone-chrome:latest'
-            args '--shm-size=2g'
-        }
-    }
+    agent any
 
     stages {
-        stage('Build & Test') {
+        stage('Run Tests in Docker') {
             steps {
-                
-                   sh 'mvn clean test'
-                
+                sh '''
+                    echo "Running tests in Docker container..."
+                    docker run --rm \
+                        -v $PWD:/workspace \
+                        -w /workspace \
+                        --shm-size=2g \
+                        selenium/standalone-chrome:latest \
+                        bash -c "apt-get update && apt-get install -y maven && mvn clean test"
+                '''
             }
         }
 

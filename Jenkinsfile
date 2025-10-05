@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent { 
+        docker { 
+            image 'selenium/standalone-chrome:latest'
+            args '--user=root --shm-size=2g' // optional, for Chrome stability
+        } 
+    }
 
     stages {
         stage('Checkout') {

@@ -8,21 +8,21 @@ pipeline {
             }
         }
 
-        //stage('Build and Test') {
-            //steps {
-               // sh 'mvn clean test'
-            //}
-        //}
-        
-        stage('Build & Test') {
+        stage('Build and Test') {
             steps {
-                // Run mvn inside a Docker container manually
-                sh '''
-                docker run --rm -v $PWD:/workspace -w /workspace selenium/standalone-chrome:latest \
-                    bash -c "apt-get update && apt-get install -y maven && mvn clean test"
-                '''
+                sh 'mvn clean test'
             }
         }
+        
+        //stage('Build & Test') {
+            //steps {
+                // Run mvn inside a Docker container manually
+                //sh '''
+               // docker run --rm -v $PWD:/workspace -w /workspace selenium/standalone-chrome:latest \
+                    //bash -c "apt-get update && apt-get install -y maven && mvn clean test"
+                //'''
+            //}
+        //}
 
         stage('Publish Reports') {
             steps {

@@ -31,4 +31,5 @@ pipeline {
             junit 'test-output/testng-results.xml'  // if TestNG generated XML reports
         }
     }
+    }
 }

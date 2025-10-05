@@ -17,7 +17,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 // Option 1: Let Maven handle testng.xml automatically
-                sh 'mvn test'
+               sh 'mvn clean test -DsuiteXmlFile=testng.xml -Djdk.net.URLClassPath.disableClassPathURLCheck=true'
 
                 // Option 2: Run specific testng.xml file manually
                 // sh 'mvn test -DsuiteXmlFile=testng.xml'

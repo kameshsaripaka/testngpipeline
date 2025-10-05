@@ -1,40 +1,26 @@
 pipeline {
-    agent any
-
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
-        stage('Build and Test') {
-            steps {
-                sh 'mvn clean test'
-            }
-        }
-        
-        //stage('Build & Test') {
-            //steps {
-                // Run mvn inside a Docker container manually
-                //sh '''
-               // docker run --rm -v $PWD:/workspace -w /workspace selenium/standalone-chrome:latest \
-                    //bash -c "apt-get update && apt-get install -y maven && mvn clean test"
-                //'''
-            //}
-        //}
-
-        stage('Publish Reports') {
-            steps {
-                // Publish TestNG or Surefire reports (generated under target/surefire-reports)
-                junit 'target/surefire-reports/*.xml'
-            }
+    agent {
+        docker {
+            image 'selenium/standalone-chrome:latest'
+            args '--shm-size=2g'
         }
     }
 
-    post {
-        always {
-            echo "Pipeline completed. Check console and reports."
+    stages {
+        stage('Build & Test') {
+            steps {
+                sh '''
+                    echo "Running tests inside selenium/standalone-chrome"
+                    apt-get update && apt-get install -y maven
+                    mvn clean test
+                '''
+            }
+        }
+
+        stage('Publish Reports') {
+            steps {
+                junit 'target/surefire-reports/*.xml'
+            }
         }
     }
 }

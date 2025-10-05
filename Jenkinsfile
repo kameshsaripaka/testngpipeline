@@ -16,14 +16,13 @@ pipeline {
 
        stage('Run TestNG Manually') {
             steps {
-                script {
-                    // Run TestNG directly using java command
-                   sh 'mvn dependency:build-classpath -Dmdep.outputFile=classpath.txt'
-                   sh 'java -cp "$(cat classpath.txt):target/classes:target/test-classes" org.testng.TestNG testng.xml'
-                }
-            }
+        sh '''
+            mvn dependency:build-classpath -Dmdep.outputFile=classpath.txt
+            java -cp "$(cat classpath.txt):target/classes:target/test-classes" org.testng.TestNG testng.xml
+        '''
+           }
         }
-    }
+    
 
        
 

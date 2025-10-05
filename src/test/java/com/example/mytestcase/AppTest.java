@@ -28,6 +28,6 @@ public class AppTest {
     @Test
     public void testFailCase() {
         System.out.println("=== Running testFailCase ===");
-        Assert.assertTrue(5 > 10, "Intentional failure for demo");
+        Assert.assertTrue(5 < 10, "Intentional failure for demo");
     }
 }

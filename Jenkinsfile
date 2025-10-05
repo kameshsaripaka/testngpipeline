@@ -19,7 +19,7 @@ pipeline {
                 script {
                     // Run TestNG directly using java command
                     sh '''
-                        java -cp "target/classes:target/test-classes:~/.m2/repository/org/testng/testng/7.10.2/testng-7.10.2.jar:~/.m2/repository/com/beust/jcommander/1.82/jcommander-1.82.jar" \
+                        java -cp "target/classes:target/test-classes:~/.m2/repository/org/testng/testng/7.7.0/testng-7.7.0.jar:~/.m2/repository/com/beust/jcommander/1.82/jcommander-1.82.jar" \
                         org.testng.TestNG testng.xml
                     '''
                 }

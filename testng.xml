@@ -5,7 +5,7 @@
   <test name="SampleTest">
     <classes>
       <!-- Replace with your actual test class -->
-      <class name="com.example.mytestcase.App"/>
+      <class name="com.example.mytestcase.AppTest"/>
       <!-- You can add more test classes here -->
       <!-- <class name="com.example.tests.HomePageTest"/> -->
     </classes>

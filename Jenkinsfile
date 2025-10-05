@@ -1,55 +1,39 @@
 pipeline {
-  agent any
+    agent any
 
-  stages {
-    stage('Checkout') {
-      steps {
-        checkout scm
-      }
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                // Option 1: Let Maven handle testng.xml automatically
+                sh 'mvn test'
+
+                // Option 2: Run specific testng.xml file manually
+                // sh 'mvn test -DsuiteXmlFile=testng.xml'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                sh 'mvn package'
+            }
+        }
     }
 
-    stage('Build') {
-      steps {
-        // run maven installed inside the Jenkins container
-        sh 'mvn -B -DskipTests clean package'
-      }
-    }
-
-    stage('Unit tests') {
-      steps {
-        sh 'mvn test'
-      }
-      post {
+    post {
         always {
-          junit '**/target/surefire-reports/*.xml'
+            junit 'target/surefire-reports/*.xml'
         }
-      }
     }
-
-    stage('Archive') {
-      steps {
-        archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
-      }
-    }
-
-    stage('Execute Latest Build') {
-      steps {
-        script {
-          // Find the latest built JAR file and execute it
-          def jarFile = sh(script: "ls -t target/*.jar | head -n 1", returnStdout: true).trim()
-          echo "Running latest build: ${jarFile}"
-          sh 'mvn test -DsuiteXmlFile=testng.xml'
-        }
-      }
-    }
-  }
-
-  post {
-    success {
-      echo 'Build succeeded'
-    }
-    failure {
-      echo 'Build failed'
-    }
-  }
 }

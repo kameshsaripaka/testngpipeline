@@ -3,6 +3,7 @@ package com.example.mytestcase;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -19,7 +20,11 @@ public class AppTest {
     public void setup() {
         // Automatically download correct ChromeDriver
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");               // run without GUI
+        options.addArguments("--no-sandbox");             // required in Docker/WSL
+        options.addArguments("--disable-dev-shm-usage");  // prevent crashes on small /dev/shm
+        driver = new ChromeDriver(options);
     }
 
     @Test

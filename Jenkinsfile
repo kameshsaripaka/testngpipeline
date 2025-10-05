@@ -18,10 +18,8 @@ pipeline {
             steps {
                 script {
                     // Run TestNG directly using java command
-                    sh '''
-                        java -cp "target/classes:target/test-classes:~/.m2/repository/org/testng/testng/7.7.0/testng-7.7.0.jar:~/.m2/repository/com/beust/jcommander/1.82/jcommander-1.82.jar" \
-                        org.testng.TestNG testng.xml
-                    '''
+                   sh 'mvn dependency:build-classpath -Dmdep.outputFile=classpath.txt'
+                   sh 'java -cp "$(cat classpath.txt):target/classes:target/test-classes" org.testng.TestNG testng.xml'
                 }
             }
         }

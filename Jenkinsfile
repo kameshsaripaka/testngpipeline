@@ -1,15 +1,30 @@
 pipeline {
-  agent { docker { image 'maven:3.9.9-eclipse-temurin-17' } }
+    agent any
 
-  stages {
-    stage('Checkout') {
-      steps { checkout scm }
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build and Test') {
+            steps {
+                sh 'mvn clean test'
+            }
+        }
+
+        stage('Publish Reports') {
+            steps {
+                // Publish TestNG or Surefire reports (generated under target/surefire-reports)
+                junit 'target/surefire-reports/*.xml'
+            }
+        }
     }
-    stage('Build & Test') {
-      steps { sh 'mvn clean test' }
+
+    post {
+        always {
+            echo "Pipeline completed. Check console and reports."
+        }
     }
-    stage('Report') {
-      steps { junit 'target/surefire-reports/*.xml' }
-    }
-  }
 }

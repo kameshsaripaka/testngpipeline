@@ -22,10 +22,17 @@ public class App
 	        String actualTitle = driver.getTitle();
 	        String expectedTitle = "Google";
 	        
+	        System.out.println("Expected Title is " + expectedTitle);
+	        System.out.println("Actual Title is " + actualTitle);
+	        
 	        if(actualTitle.equals(expectedTitle))
+	        {
 	        	System.out.println("Test Case Passed");
+	        }	        	
 	        else
+	        {
 	        	System.out.println("Test Case Failed");
+	        }
 	        
 	        Assert.assertEquals(actualTitle, expectedTitle);
 	        

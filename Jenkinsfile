@@ -9,11 +9,9 @@ pipeline {
     stages {
         stage('Build & Test') {
             steps {
-                sh '''
-                    echo "Running tests inside selenium/standalone-chrome"
-                    apt-get update && apt-get install -y maven
-                    mvn clean test
-                '''
+                
+                   sh 'mvn clean test'
+                
             }
         }
 

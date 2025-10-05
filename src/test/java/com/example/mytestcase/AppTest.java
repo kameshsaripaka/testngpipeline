@@ -24,7 +24,13 @@ public class AppTest {
         options.addArguments("--headless");               // run without GUI
         options.addArguments("--no-sandbox");             // required in Docker/WSL
         options.addArguments("--disable-dev-shm-usage");  // prevent crashes on small /dev/shm
+        options.addArguments("--headless");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        
         driver = new ChromeDriver(options);
+        
+        
     }
 
     @Test

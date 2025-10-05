@@ -1,30 +1,15 @@
 pipeline {
-    agent any
+  agent { docker { image 'maven:3.9.9-eclipse-temurin-17' } }
 
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
-         stage('Build') {
-            steps {
-                sh 'mvn clean compile test-compile'
-            }
-        }
-
-       stage('Run TestNG Manually') {
-            steps {
-        sh '''
-   			set +e
-  			 java -cp "$(cat classpath.txt):target/classes:target/test-classes" org.testng.TestNG testng.xml
-   			echo "Exit code: $?"
-   			set -e
-			'''
-           }
-        }
-          
-    
+  stages {
+    stage('Checkout') {
+      steps { checkout scm }
     }
+    stage('Build & Test') {
+      steps { sh 'mvn clean test' }
+    }
+    stage('Report') {
+      steps { junit 'target/surefire-reports/*.xml' }
+    }
+  }
 }

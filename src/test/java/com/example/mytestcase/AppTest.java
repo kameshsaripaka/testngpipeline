@@ -28,7 +28,7 @@ public class AppTest {
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         
-        driver = new ChromeDriver(options);  //set it right
+        driver = new ChromeDriver(options);  //set it right with options
         
         
     }

@@ -24,17 +24,16 @@ public class AppTest {
         options.addArguments("--headless");               // run without GUI
         options.addArguments("--no-sandbox");             // required in Docker/WSL
         options.addArguments("--disable-dev-shm-usage");  // prevent crashes on small /dev/shm
-        options.addArguments("--headless");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
         
-        driver = new ChromeDriver(options);  //set it right with options
+        
+        driver = new ChromeDriver(options);  //create ChromeDriver instance with options
         
         
     }
 
     @Test
-    public void openGoogle() {
+    public void openGoogle() 
+    {
         driver.get("https://www.google.com");
         assertTrue(driver.getTitle().contains("Google"), "Title should contain Google");
         System.out.println("Page title: " + driver.getTitle());

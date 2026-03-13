@@ -37,6 +37,7 @@ public class AppTest {
         assertTrue(driver.getTitle().contains("Google"), "Title should contain Google");
         System.out.println("Today's date is: " + new java.util.Date());
         System.out.println("Jamal Tisha Rani Shobha");
+        System.out.println("Our New Test Case....");
         System.out.println("Page title: " + driver.getTitle());
     }
 

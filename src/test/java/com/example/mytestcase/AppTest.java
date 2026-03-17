@@ -21,7 +21,7 @@ public class AppTest {
         // Automatically download correct ChromeDriver
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");               // run without GUI
+        options.addArguments("--headless");               // run without GUI on the target platform
         options.addArguments("--no-sandbox");             // required in Docker/WSL
         options.addArguments("--disable-dev-shm-usage");  // prevent crashes on small /dev/shm        
         

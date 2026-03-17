@@ -32,21 +32,18 @@
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
       <version>7.10.2</version>
-      <scope>test</scope>
-    </dependency>
+     </dependency>
     
     <dependency>
     	<groupId>org.seleniumhq.selenium</groupId>
     	<artifactId>selenium-java</artifactId>
-    	<version>4.16.0</version> <!-- latest stable -->
-    	<scope>test</scope>
+    	<version>4.16.0</version> <!-- latest stable -->    	
 	</dependency>
 	
 	<dependency>
     	<groupId>io.github.bonigarcia</groupId>
     	<artifactId>webdrivermanager</artifactId>
-    	<version>5.5.3</version>
-    	<scope>test</scope>
+    	<version>5.5.3</version>    	
 	</dependency>
 
   </dependencies>

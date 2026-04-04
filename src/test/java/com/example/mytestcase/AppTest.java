@@ -39,6 +39,14 @@ public class AppTest {
         System.out.println("Jamal Tisha Rani Shobha");
         System.out.println("Our New Test Case....");
         System.out.println("Page title: " + driver.getTitle());
+        if(driver.getTitle().contains("Google")) 
+        {
+			System.out.println("Test Passed: Title contains Google");
+		} 
+        else 
+        {
+			System.out.println("Test Failed: Title does not contain Google");
+		}
     }
 
     @AfterClass
